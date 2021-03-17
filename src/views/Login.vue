@@ -1,10 +1,10 @@
 <template>
   <div class="row">
-      <div class="col-sm-5 m-auto">
       <div class="text-center mb-4">
-          <h1>Signup</h1>
+          <h1>Login</h1>
       </div>
-          <form id="sigup-form" @submit.prevent="signupRequest">
+      <div class="col-sm-5 m-auto">
+          <form id="login-form" @submit.prevent="loginUsser">
             <div class="row">
                 <div class="col-sm-12 form-group">
                     <label for="email">Email address</label>
@@ -12,18 +12,18 @@
                 </div>
                 <div class="col-sm-12 form-group">
                     <label for="password">Password</label>
-                    <input type="password" id="password" v-model="password" class="form-control form-control-lg">
+                    <input type="password" id="password"  v-model="password" class="form-control form-control-lg">
                 </div>
                 <br>
                  <div class="col-sm-12 form-group py-4">
-                     <button v-if="! xhrRequest" class="btn btn-primary btn-lg col-sm-4" style="background-color:#FF3333;">Signup</button>
+                     <button v-if="! xhrRequest" class="btn btn-primary btn-lg col-sm-4" style="background-color:#FF3333;">Login</button>
                      <button v-if="xhrRequest" class="btn btn-primary btn-lg col-sm-4"  style="background-color:#FF3333;">
                          <span class="spinner-border spinner-border-sm btn-spn"></span>
                          wait ...
                      </button>
                  </div>
                   <div class="col-sm-12 form-group mt-5">
-                     <p>Don't have an account?  <router-link  to="/login" >Login</router-link> </p>
+                     <p>Don't have an account?  <router-link  to="/About">Signup</router-link> </p>
                  </div>
             </div>
           </form>
@@ -34,28 +34,31 @@
 <script>
 import firebase from 'firebase'
 export default {
-data(){
-    return{
+    data(){
+        return{
         email:'',
         password:'',
-        xhrRequest: false
-    }
-},
-methods: {
-    signupRequest(){
+        xhrRequest: false 
+        }
+    },
+    methods: {
+    loginUsser(){
         let v = this;
         v.xhrRequest=true;
-        firebase.auth().createUserWithEmailAndPassword(this.email,this.password).then(
+        firebase.auth().signInWithEmailAndPassword(this.email,this.password).then(
             () =>{
-               this.$router.replace('login');
+                v.xhrRequest=false;
+                alert('Login');
+               this.$router.replace('member-area');
             },
             (err) =>{
                 v.xhrRequest=false;
-                alert(`Error - ${err.maeeage}`);
+                console.log(`Error - ${err.maeeage}`);
             }
+    
         );
     }
-}
+    }
 }
 </script>
 <style scoped>

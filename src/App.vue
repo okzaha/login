@@ -1,10 +1,28 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+    
+  <div class="navbar navbar-dark " style="background-color:#FF3333;">
+
+   
+  <a class="navbar-brand" href="#">
+    <img src="https://grandorder.wiki/images/8/80/Icon_Coin_Saber.png" width="30" height="30" class="d-inline-block align-top" alt="">
+ งานLogin
+  </a>
+
+    <ul class="nav">
+     <li class="nav-item ">
+        <router-link class="text-white" to="/">Home<a>|</a></router-link> 
+     </li>
+    
+     <li class="nav-item ">
+       <router-link class="text-white"  to="/Login"> Login</router-link>
+     </li>
+     
+    </ul>
+  </div>
+  <div class="cintainer py-4">
     <router-view/>
+  </div>
   </div>
 </template>
 
